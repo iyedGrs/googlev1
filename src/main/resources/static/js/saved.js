@@ -1,0 +1,182 @@
+// API Configuration
+const API_BASE = 'http://localhost:8080/api/saved-items';
+
+// Load saved items on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadSavedItems();
+});
+
+// Load all saved items from backend
+async function loadSavedItems() {
+    try {
+        const response = await fetch(API_BASE);
+        const items = await response.json();
+        
+        displayItems(items);
+    } catch (error) {
+        console.error('Error loading saved items:', error);
+        showToast('Failed to load saved items', 'error');
+    }
+}
+
+// Display items in the UI
+function displayItems(items) {
+    const container = document.getElementById('items-container');
+    const emptyState = document.getElementById('empty-state');
+    const badge = document.getElementById('count-badge');
+    
+    // Update count
+    badge.textContent = `${items.length} item${items.length !== 1 ? 's' : ''}`;
+    
+    if (items.length === 0) {
+        emptyState.style.display = 'block';
+        container.classList.remove('active');
+        return;
+    }
+    
+    emptyState.style.display = 'none';
+    container.classList.add('active');
+    container.innerHTML = '';
+    
+    items.forEach(item => {
+        const card = createCard(item);
+        container.appendChild(card);
+    });
+}
+
+// Create a card element for a saved item
+function createCard(item) {
+    const card = document.createElement('div');
+    card.className = 'saved-card';
+    card.dataset.id = item.id;
+    
+    const date = new Date(item.savedDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    
+    card.innerHTML = `
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">${escapeHtml(item.title)}</h3>
+                <a href="${escapeHtml(item.url)}" target="_blank" class="card-url">
+                    <i class="fas fa-external-link-alt"></i> ${escapeHtml(item.url)}
+                </a>
+            </div>
+            <button class="delete-btn" onclick="deleteItem(${item.id})">
+                <i class="fas fa-trash"></i> Delete
+            </button>
+        </div>
+        <p class="card-summary">${escapeHtml(item.summary || 'No summary available')}</p>
+        <div class="notes-section">
+            <label class="notes-label"><i class="fas fa-sticky-note"></i> Personal Notes:</label>
+            <textarea class="notes-textarea" 
+                      placeholder="Add your notes here..."
+                      onchange="updateNotes(${item.id}, this.value)">${escapeHtml(item.notes || '')}</textarea>
+        </div>
+        <div class="card-date"><i class="far fa-clock"></i> Saved on ${date}</div>
+    `;
+    
+    return card;
+}
+
+// Save a new item (called from other pages)
+async function saveItem(title, url, summary) {
+    try {
+        const response = await fetch(API_BASE, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, url, summary })
+        });
+        
+        if (response.ok) {
+            showToast('Item saved successfully!', 'success');
+            return true;
+        } else {
+            const error = await response.json();
+            showToast(error.error || 'Failed to save item', 'warning');
+            return false;
+        }
+    } catch (error) {
+        console.error('Error saving item:', error);
+        showToast('Failed to save item', 'error');
+        return false;
+    }
+}
+
+// Update notes for an item
+async function updateNotes(id, notes) {
+    try {
+        const response = await fetch(`${API_BASE}/${id}/notes`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ notes })
+        });
+        
+        if (response.ok) {
+            showToast('Notes updated', 'success');
+        } else {
+            showToast('Failed to update notes', 'error');
+        }
+    } catch (error) {
+        console.error('Error updating notes:', error);
+        showToast('Failed to update notes', 'error');
+    }
+}
+
+// Delete an item
+async function deleteItem(id) {
+    if (!confirm('Are you sure you want to delete this item?')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_BASE}/${id}`, {
+            method: 'DELETE'
+        });
+        
+        if (response.ok) {
+            showToast('Item deleted', 'success');
+            // Remove card from UI
+            const card = document.querySelector(`[data-id="${id}"]`);
+            if (card) {
+                card.remove();
+            }
+            // Reload to update count
+            loadSavedItems();
+        } else {
+            showToast('Failed to delete item', 'error');
+        }
+    } catch (error) {
+        console.error('Error deleting item:', error);
+        showToast('Failed to delete item', 'error');
+    }
+}
+
+// Show toast notification
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = `toast ${type} show`;
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Make functions globally available
+window.saveItem = saveItem;
+window.updateNotes = updateNotes;
+window.deleteItem = deleteItem;
+window.showToast = showToast;
