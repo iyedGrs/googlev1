@@ -58,6 +58,7 @@ function createCard(item) {
         minute: '2-digit'
     });
     
+    const detailsId = `details-${item.id}`;
     const notesId = `notes-${item.id}`;
     
     card.innerHTML = `
@@ -72,22 +73,47 @@ function createCard(item) {
                 <i class="fas fa-trash"></i> Delete
             </button>
         </div>
-        <p class="card-summary">${escapeHtml(item.summary || 'No summary available')}</p>
-        <div class="card-date"><i class="far fa-clock"></i> Saved on ${date}</div>
-        <div class="notes-section">
-            <button class="notes-toggle" onclick="toggleNotes('${notesId}', this)">
-                <i class="fas fa-chevron-right"></i>
-                <span><i class="fas fa-sticky-note"></i> Personal Notes</span>
-            </button>
-            <div id="${notesId}" class="notes-content">
-                <textarea class="notes-textarea" 
-                          placeholder="Add your notes here..."
-                          onchange="updateNotes(${item.id}, this.value)">${escapeHtml(item.notes || '')}</textarea>
+        
+        <button class="expand-toggle" onclick="toggleDetails('${detailsId}', this)">
+            <i class="fas fa-chevron-down"></i> Show Details
+        </button>
+        
+        <div id="${detailsId}" class="details-content">
+            <p class="card-summary">${escapeHtml(item.summary || 'No summary available')}</p>
+            <div class="card-date"><i class="far fa-clock"></i> Saved on ${date}</div>
+            
+            <div class="notes-section">
+                <button class="notes-toggle" onclick="toggleNotes('${notesId}', this)">
+                    <i class="fas fa-chevron-right"></i>
+                    <span><i class="fas fa-sticky-note"></i> Personal Notes</span>
+                </button>
+                <div id="${notesId}" class="notes-content">
+                    <textarea class="notes-textarea" 
+                              placeholder="Add your notes here..."
+                              onchange="updateNotes(${item.id}, this.value)">${escapeHtml(item.notes || '')}</textarea>
+                </div>
             </div>
         </div>
     `;
     
     return card;
+}
+
+// Toggle details visibility
+function toggleDetails(detailsId, button) {
+    const detailsContent = document.getElementById(detailsId);
+    const icon = button.querySelector('i');
+    const isExpanded = detailsContent.classList.contains('expanded');
+    
+    if (isExpanded) {
+        detailsContent.classList.remove('expanded');
+        icon.className = 'fas fa-chevron-down';
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> Show Details';
+    } else {
+        detailsContent.classList.add('expanded');
+        icon.className = 'fas fa-chevron-up';
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Details';
+    }
 }
 
 // Toggle notes visibility
@@ -102,7 +128,6 @@ function toggleNotes(notesId, button) {
         notesContent.classList.add('expanded');
         button.classList.add('expanded');
     }
-}
 }
 
 // Save a new item (called from other pages)
@@ -202,4 +227,5 @@ window.saveItem = saveItem;
 window.updateNotes = updateNotes;
 window.deleteItem = deleteItem;
 window.showToast = showToast;
+window.toggleDetails = toggleDetails;
 window.toggleNotes = toggleNotes;

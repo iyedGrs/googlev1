@@ -26,6 +26,7 @@ public class SavedItemService {
                 .collect(Collectors.toList());
     }
     
+ 
     @Transactional
     public SavedItemResponse saveItem(SavedItemRequest request) {
         if (repository.existsByUrl(request.getUrl())) {
@@ -36,12 +37,13 @@ public class SavedItemService {
             request.getTitle(),
             request.getUrl(),
             request.getSummary()
-        );
+        ); 
         
         SavedItem saved = repository.save(item);
         return new SavedItemResponse(saved);
     }
     
+
     @Transactional
     public SavedItemResponse updateNotes(Long id, String notes) {
         SavedItem item = repository.findById(id)
@@ -52,6 +54,7 @@ public class SavedItemService {
         return new SavedItemResponse(updated);
     }
     
+
     @Transactional
     public void deleteItem(Long id) {
         if (!repository.existsById(id)) {

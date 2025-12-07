@@ -116,6 +116,37 @@ main {
     background: #ee5a6f;
 }
 
+.expand-toggle {
+    background: none;
+    border: none;
+    color: #667eea;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.expand-toggle:hover {
+    color: #5568d3;
+}
+
+.details-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.details-content.expanded {
+    max-height: 800px;
+    margin-top: 10px;
+}
+
 .card-summary {
     color: #666;
     margin: 15px 0;
