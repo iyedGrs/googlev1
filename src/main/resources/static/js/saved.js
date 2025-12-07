@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE = 'http://localhost:8080/api/saved-items';
+const API_BASE = 'http://localhost:8081/api/saved-items';
 
 // Load saved items on page load
 document.addEventListener('DOMContentLoaded', () => {
