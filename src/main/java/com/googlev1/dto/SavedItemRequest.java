@@ -5,7 +5,6 @@ public class SavedItemRequest {
     private String url;
     private String summary;
     
-    // Constructors
     public SavedItemRequest() {}
     
     public SavedItemRequest(String title, String url, String summary) {
@@ -14,7 +13,6 @@ public class SavedItemRequest {
         this.summary = summary;
     }
     
-    // Getters and Setters
     public String getTitle() {
         return title;
     }

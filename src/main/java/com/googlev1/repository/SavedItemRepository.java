@@ -10,12 +10,9 @@ import java.util.Optional;
 @Repository
 public interface SavedItemRepository extends JpaRepository<SavedItem, Long> {
     
-    // Check if URL already exists
     boolean existsByUrl(String url);
     
-    // Find by URL
     Optional<SavedItem> findByUrl(String url);
     
-    // Get all items ordered by saved date (newest first)
     List<SavedItem> findAllByOrderBySavedDateDesc();
 }

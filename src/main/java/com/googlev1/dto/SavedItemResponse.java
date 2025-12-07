@@ -11,7 +11,6 @@ public class SavedItemResponse {
     private String notes;
     private LocalDateTime savedDate;
     
-    // Constructor from entity
     public SavedItemResponse(SavedItem item) {
         this.id = item.getId();
         this.title = item.getTitle();
@@ -21,7 +20,6 @@ public class SavedItemResponse {
         this.savedDate = item.getSavedDate();
     }
     
-    // Getters and Setters
     public Long getId() {
         return id;
     }
