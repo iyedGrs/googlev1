@@ -124,13 +124,44 @@ main {
 
 .notes-section {
     margin-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
 }
 
-.notes-label {
+.notes-toggle {
+    background: none;
+    border: none;
+    color: #667eea;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 0.95rem;
+}
+
+.notes-toggle:hover {
+    color: #5568d3;
+}
+
+.notes-toggle i {
+    transition: transform 0.3s;
+}
+
+.notes-toggle.expanded i {
+    transform: rotate(90deg);
+}
+
+.notes-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.notes-content.expanded {
+    max-height: 300px;
+    margin-top: 10px;
 }
 
 .notes-textarea {

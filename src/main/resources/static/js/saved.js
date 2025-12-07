@@ -58,6 +58,8 @@ function createCard(item) {
         minute: '2-digit'
     });
     
+    const notesId = `notes-${item.id}`;
+    
     card.innerHTML = `
         <div class="card-header">
             <div>
@@ -71,16 +73,36 @@ function createCard(item) {
             </button>
         </div>
         <p class="card-summary">${escapeHtml(item.summary || 'No summary available')}</p>
-        <div class="notes-section">
-            <label class="notes-label"><i class="fas fa-sticky-note"></i> Personal Notes:</label>
-            <textarea class="notes-textarea" 
-                      placeholder="Add your notes here..."
-                      onchange="updateNotes(${item.id}, this.value)">${escapeHtml(item.notes || '')}</textarea>
-        </div>
         <div class="card-date"><i class="far fa-clock"></i> Saved on ${date}</div>
+        <div class="notes-section">
+            <button class="notes-toggle" onclick="toggleNotes('${notesId}', this)">
+                <i class="fas fa-chevron-right"></i>
+                <span><i class="fas fa-sticky-note"></i> Personal Notes</span>
+            </button>
+            <div id="${notesId}" class="notes-content">
+                <textarea class="notes-textarea" 
+                          placeholder="Add your notes here..."
+                          onchange="updateNotes(${item.id}, this.value)">${escapeHtml(item.notes || '')}</textarea>
+            </div>
+        </div>
     `;
     
     return card;
+}
+
+// Toggle notes visibility
+function toggleNotes(notesId, button) {
+    const notesContent = document.getElementById(notesId);
+    const isExpanded = notesContent.classList.contains('expanded');
+    
+    if (isExpanded) {
+        notesContent.classList.remove('expanded');
+        button.classList.remove('expanded');
+    } else {
+        notesContent.classList.add('expanded');
+        button.classList.add('expanded');
+    }
+}
 }
 
 // Save a new item (called from other pages)
@@ -180,3 +202,4 @@ window.saveItem = saveItem;
 window.updateNotes = updateNotes;
 window.deleteItem = deleteItem;
 window.showToast = showToast;
+window.toggleNotes = toggleNotes;
