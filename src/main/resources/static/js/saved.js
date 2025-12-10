@@ -149,12 +149,19 @@ async function saveItem(title, url, summary) {
             return true;
         } else {
             const error = await response.json();
-            showToast(error.error || 'Failed to save item', 'warning');
+            showToast(
+                (error.error ? `Failed to save item: ${error.error}` : `Failed to save item (status ${response.status})`),
+                'warning'
+            );
             return false;
         }
     } catch (error) {
         console.error('Error saving item:', error);
-        showToast('Failed to save item', 'error');
+        if (error instanceof TypeError) {
+            showToast('Network error: Unable to reach server. Please check your connection.', 'error');
+        } else {
+            showToast(`Unexpected error: ${error.message || error}`, 'error');
+        }
         return false;
     }
 }
