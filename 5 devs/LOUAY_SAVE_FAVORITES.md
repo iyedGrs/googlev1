@@ -71,13 +71,13 @@ Document the JSON contracts in README or an API reference so teammates can call 
 
 ## ✅ Checklist
 
-- [ ] Entity + repository committed with migrations or schema notes
-- [ ] Service + controller return clear success and error payloads
-- [ ] Saved page renders list, empty state, and count badge
-- [ ] Notes autosave without page reload
-- [ ] Delete flow confirms action and updates UI instantly
-- [ ] Toast notifications cover success, duplicate, and failure cases
-- [ ] Documentation shared so Aziz and Emna know how to call your helpers
+- [x] Entity + repository committed with migrations or schema notes
+- [x] Service + controller return clear success and error payloads
+- [x] Saved page renders list, empty state, and count badge
+- [x] Notes autosave without page reload
+- [x] Delete flow confirms action and updates UI instantly
+- [x] Toast notifications cover success, duplicate, and failure cases
+- [x] Documentation shared so Aziz and Emna know how to call your helpers
 
 ---
 
