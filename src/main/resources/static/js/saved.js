@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadSavedItems() {
     try {
         const response = await fetch(API_BASE);
+        if (!response.ok) {
+            console.error('HTTP error:', response.status, response.statusText);
+            showToast('Failed to load saved items', 'error');
+            return;
+        }
         const items = await response.json();
         
         displayItems(items);
