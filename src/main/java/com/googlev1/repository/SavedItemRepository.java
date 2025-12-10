@@ -12,7 +12,6 @@ public interface SavedItemRepository extends JpaRepository<SavedItem, Long> {
     
     boolean existsByUrl(String url);
     
-    Optional<SavedItem> findByUrl(String url);
     
     List<SavedItem> findAllByOrderBySavedDateDesc();
 }
