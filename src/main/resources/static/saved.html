@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Saved Items</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/saved.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="nav-wrapper">
+                <nav class="navbar">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="saved.html" class="nav-item active">
+                        <i class="fas fa-bookmark"></i>
+                        <span>Saved Items</span>
+                    </a>
+                    <a href="history.html" class="nav-item">
+                        <i class="fas fa-history"></i>
+                        <span>Search History</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="header-info">
+                <h1><i class="fas fa-bookmark"></i> My Saved Items</h1>
+                <p class="subtitle">Store and manage your favorite items</p>
+            </div>
+        </div>
+        <div class="controls">
+            <span id="count-badge" class="badge">
+                <i class="fas fa-list"></i>
+                <span id="count-text">0</span>
+            </span>
+        </div>
+    </header>
+    
+    <main>
+        <div id="empty-state" class="empty-state">
+            <i class="fas fa-inbox empty-icon"></i>
+            <p>No saved items yet</p>
+            <p class="subtitle">Start saving your favorite items!</p>
+        </div>
+        
+        <div id="items-container" class="items-container"></div>
+    </main>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="js/saved.js"></script>
+</body>
+</html>
