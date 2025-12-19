@@ -280,3 +280,35 @@ function onSaveButtonClick(result) {
     window.saveItem(result.title, result.url, result.summary);
 }
 ```
+
+---
+
+# Content Viewer API Documentation
+
+## Endpoint
+**GET** `/api/content?url={articleUrl}&forceRefresh={true|false}`
+
+Returns normalized article content for a URL. Requests within the cache TTL reuse stored content unless `forceRefresh=true`.
+
+**Query Parameters**
+- `url` (String, required) - Article URL (URL-encoded)
+- `forceRefresh` (Boolean, optional) - Bypass cache when true (default false)
+
+**Response: 200 OK**
+```json
+{
+  "url": "https://example.com/article",
+  "title": "Article Title",
+  "content": "Cleaned article content text...",
+  "wordCount": 742,
+  "fetchedAt": "2025-12-19T10:18:00",
+  "cached": true
+}
+```
+
+**Response: 400 Bad Request**
+```json
+{
+  "error": "url parameter is required"
+}
+```
