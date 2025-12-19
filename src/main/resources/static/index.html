@@ -328,6 +328,36 @@
             </a>
         </div>
     </div>
+
+    <section class="results-section">
+        <div class="results-header">
+            <h2>Search Results</h2>
+            <p class="results-subtitle">Results will appear here after a search.</p>
+        </div>
+        <div id="resultsEmpty" class="results-empty">No results yet. Try a search above.</div>
+        <div id="resultsContainer" class="results-grid"></div>
+        <div id="resultsPagination" class="results-pagination"></div>
+    </section>
+
+    <div id="contentModal" class="content-modal" aria-hidden="true" role="dialog" aria-labelledby="contentModalTitle">
+        <div class="content-modal__backdrop" data-close="true"></div>
+        <div class="content-modal__panel" role="document">
+            <button class="content-modal__close" type="button" aria-label="Close content viewer">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="content-modal__header">
+                <h2 id="contentModalTitle">Loading content...</h2>
+                <div id="contentModalMeta" class="content-modal__meta"></div>
+            </div>
+            <div id="contentModalBody" class="content-modal__body"></div>
+            <div class="content-modal__footer">
+                <button class="btn btn-secondary content-modal__close-btn" type="button">Close</button>
+                <button class="btn content-modal__save-btn" type="button">
+                    <i class="fas fa-bookmark"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
     
     <script src="js/history.js"></script>
     <script src="js/results.js"></script>
