@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/search")
 @Slf4j
-public class searchController {
+public class SearchController {
 
     private final TavilyService tavilyService;
 
     @Autowired
-    public searchController(TavilyService tavilyService) {
+    public SearchController(TavilyService tavilyService) {
         this.tavilyService = tavilyService;
     }
 
