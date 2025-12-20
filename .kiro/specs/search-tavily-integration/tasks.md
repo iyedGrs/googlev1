@@ -1,6 +1,6 @@
 # Implementation Plan
 
-- [ ] 1. Project Setup and Dependencies
+- [x] 1. Project Setup and Dependencies
   - [x] 1.1 Add WebFlux dependency to pom.xml for WebClient
 
 
@@ -97,7 +97,7 @@
     - Add deleteByExpiresAtBefore method
     - _Requirements: 3.2, 3.4_
 
-- [-] 4. Cache Service Implementation
+- [x] 4. Cache Service Implementation
 
 
   - [x] 4.1 Implement SearchCacheService
@@ -119,7 +119,7 @@
     - Verify only expired entries are removed
     - **Validates: Requirements 3.4**
 
-- [ ] 5. Tavily Service Implementation
+- [x] 5. Tavily Service Implementation
 
 
 
