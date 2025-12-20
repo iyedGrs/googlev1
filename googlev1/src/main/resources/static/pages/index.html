@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - Google V1</title>
+    <link rel="stylesheet" href="../css/common/style.css">
+    <link rel="stylesheet" href="../css/pages/search.css">
+</head>
+<body>
+    <!-- Navigation Bar (Loaded dynamically from /api/navigation) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">🔍 Search</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <!-- Populated by app.js -->
+            </div>
+            <div class="nav-status" id="statusBadge">
+                <!-- Status badge from Iyed will go here -->
+            </div>
+            <button class="btn-preferences" id="preferencesBtn" aria-label="Open preferences" title="Preferences">
+                ⚙️
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Search Hero Section -->
+        <section class="search-hero">
+            <h1 id="heroTitle">Find Your Answers</h1>
+            <p class="subtitle">Search across the web with advanced filters and preferences</p>
+            
+            <!-- Search Form -->
+            <form class="search-form" id="searchForm" aria-labelledby="heroTitle">
+                <div class="search-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="searchQuery" 
+                        class="search-input" 
+                        placeholder="Enter your search query..."
+                        required
+                        autocomplete="off"
+                        aria-label="Search query input"
+                        aria-describedby="searchHelp"
+                    >
+                    <select id="searchType" class="search-type" aria-label="Search type filter">
+                        <option value="general">General</option>
+                        <option value="news">News</option>
+                    </select>
+                    <button type="submit" class="btn-search" aria-label="Submit search">
+                        <span>Search</span>
+                    </button>
+                </div>
+                <small id="searchHelp" class="sr-only">Enter keywords to search. Use the dropdown to filter by type.</small>
+                
+                <!-- Search Suggestions (from Iyed) -->
+                <div class="suggestions-container hidden" id="suggestionsContainer" role="region" aria-label="Search suggestions">
+                    <!-- Populated by search.js with cached suggestions -->
+                </div>
+                
+                <!-- Error Message -->
+                <div class="error-message hidden" id="errorMessage" role="alert" aria-live="assertive"></div>
+            </form>
+        </section>
+
+        <!-- Loading State -->
+        <div class="loading hidden" id="loadingState" role="status" aria-live="polite">
+            <div class="spinner"></div>
+            <p>Searching...</p>
+        </div>
+
+        <!-- Results Container (For Aziz's result display) -->
+        <section id="resultsContainer" class="results-container hidden">
+            <!-- Results will be rendered here by Aziz's displayResults() function -->
+        </section>
+
+        <!-- Preferences Panel -->
+        <section class="preferences-panel hidden" id="preferencesPanel" aria-labelledby="preferencesTitle">
+            <h2 id="preferencesTitle">User Preferences</h2>
+            <form id="preferencesForm" onsubmit="event.preventDefault(); window.savePreferences && window.savePreferences();">
+                <div class="preference-group">
+                    <label for="themePref">Theme:</label>
+                    <select id="themePref" onchange="setTheme(this.value)" aria-describedby="themeHelp">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                    <small id="themeHelp">Choose your preferred color theme</small>
+                </div>
+                <div class="preference-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="tipsCheckbox" aria-describedby="tipsHelp">
+                        Show Advanced Tips
+                    </label>
+                    <small id="tipsHelp">Display additional helpful information while searching</small>
+                </div>
+                <button type="submit" id="savePreferencesBtn" class="btn-secondary" aria-label="Save user preferences">
+                    Save Preferences
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/core/app.js"></script>
+    <script src="../js/pages/search.js"></script>
+    <script>
+        console.log('=== PAGE LOADED ===');
+        
+        // Wait for app.js to load
+        setTimeout(() => {
+            console.log('✓ setTheme type:', typeof window.setTheme);
+            console.log('✓ Functions exported:', {
+                setTheme: typeof window.setTheme,
+                showToast: typeof window.showToast,
+                applyPreferences: typeof window.applyPreferences
+            });
+            
+            // Ensure dark theme from localStorage is applied
+            const savedTheme = localStorage.getItem('theme');
+            console.log('📦 Saved theme in localStorage:', savedTheme);
+            
+            if (savedTheme === 'dark') {
+                console.log('🌙 Applying dark theme...');
+                if (typeof window.setTheme === 'function') {
+                    window.setTheme('dark');
+                } else {
+                    console.error('❌ setTheme not available!');
+                }
+            }
+        }, 100);
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Saved Items - Google V1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/common/style.css">
+    <link rel="stylesheet" href="css/pages/saved.css">
+</head>
+<body>
+    <!-- Navigation Bar (Loaded dynamically from /api/navigation) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">⭐ Saved</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <!-- Populated by app.js -->
+            </div>
+            <div class="nav-status" id="statusBadge">
+                <!-- Status badge from Iyed will go here -->
+            </div>
+            <button class="btn-preferences" id="preferencesBtn" aria-label="Open preferences" title="Preferences">
+                ⚙️
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="saved-header">
+            <h1><i class="fas fa-bookmark"></i> My Saved Items</h1>
+            <span id="count-badge" class="badge">0 items</span>
+        </section>
+    
+        <div id="empty-state" class="empty-state">
+            <i class="fas fa-inbox empty-icon"></i>
+            <p>No saved items yet</p>
+            <p class="subtitle">Start saving your favorite search results!</p>
+        </div>
+        
+        <div id="items-container" class="items-container"></div>
+    </main>
+    
+    <!-- Preferences Panel -->
+    <section class="preferences-panel hidden" id="preferencesPanel" aria-labelledby="preferencesTitle">
+        <h2 id="preferencesTitle">Preferences</h2>
+        <form id="preferencesForm" onsubmit="event.preventDefault();">
+            <div class="preference-group">
+                <label for="themePref">Theme:</label>
+                <select id="themePref" onchange="setTheme(this.value)" aria-describedby="themeHelp">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+                <small id="themeHelp">Choose your preferred color theme</small>
+            </div>
+        </form>
+    </section>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="js/core/app.js"></script>
+    <script src="js/pages/saved.js"></script>
+</body>
+</html>

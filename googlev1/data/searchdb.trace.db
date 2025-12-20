@@ -1,0 +1,6 @@
+2025-12-20 14:30:39.666452+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER_PREFERENCE" not found (this database is empty); SQL statement:
+INSERT INTO USER_PREFERENCE (default_query, default_type, theme, show_advanced_tips, updated_at) SELECT 'latest news', 'general', 'light', true, CURRENT_TIMESTAMP WHERE NOT EXISTS (SELECT 1 FROM USER_PREFERENCE LIMIT 1) [42104-240]
+2025-12-20 14:31:57.564899+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER_PREFERENCE" not found (this database is empty); SQL statement:
+INSERT INTO USER_PREFERENCE (default_query, default_type, theme, show_advanced_tips, updated_at) SELECT 'latest news', 'general', 'light', true, CURRENT_TIMESTAMP WHERE NOT EXISTS (SELECT 1 FROM USER_PREFERENCE LIMIT 1) [42104-240]
