@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search History - Google V1</title>
+    <link rel="stylesheet" href="css/common/style.css">
+    <link rel="stylesheet" href="css/pages/history.css">
+</head>
+<body>
+    <!-- Navigation Bar (Loaded dynamically from /api/navigation) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">📜 History</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <!-- Populated by app.js -->
+            </div>
+            <div class="nav-status" id="statusBadge">
+                <!-- Status badge from Iyed will go here -->
+            </div>
+            <button class="btn-preferences" id="preferencesBtn" aria-label="Open preferences" title="Preferences">
+                ⚙️
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="history-header">
+            <h1>Search History</h1>
+            <p class="subtitle">Your recent searches and previous queries</p>
+            <div class="header-actions">
+                <span id="historyCount" class="count-badge">0 searches</span>
+                <button id="clearAllBtn" class="btn-secondary" style="display: none;">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+        </section>
+
+        <!-- History List -->
+        <div id="historyContainer" class="history-container">
+            <!-- History items will be rendered here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state">
+            <div class="empty-icon">📜</div>
+            <p>No search history yet</p>
+            <p class="subtitle">Your searches will appear here</p>
+            <a href="/" class="btn-primary">Start Searching</a>
+        </div>
+    </main>
+    
+    <!-- Preferences Panel -->
+    <section class="preferences-panel hidden" id="preferencesPanel" aria-labelledby="preferencesTitle">
+        <h2 id="preferencesTitle">Preferences</h2>
+        <form id="preferencesForm" onsubmit="event.preventDefault();">
+            <div class="preference-group">
+                <label for="themePref">Theme:</label>
+                <select id="themePref" onchange="setTheme(this.value)" aria-describedby="themeHelp">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+                <small id="themeHelp">Choose your preferred color theme</small>
+            </div>
+        </form>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/core/app.js"></script>
+    <script src="js/pages/history.js"></script>
+</body>
+</html>
