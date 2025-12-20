@@ -3,7 +3,6 @@ package com.googlev1.controller.search;
 import com.googlev1.dto.search.SearchRequest;
 import com.googlev1.dto.search.SearchResponse;
 import com.googlev1.service.TavilyService;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +32,7 @@ public class SearchController {
      * @return SearchResponse containing search results and metadata
      */
     @PostMapping
-    public ResponseEntity<SearchResponse> search(@Valid @RequestBody SearchRequest request) {
+    public ResponseEntity<SearchResponse> search(@RequestBody SearchRequest request) {
         log.info("Received search request for query: '{}' with searchType: '{}'", 
                 request.getQuery(), request.getSearchType());
         

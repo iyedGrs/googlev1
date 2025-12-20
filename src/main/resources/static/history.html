@@ -3,54 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search History</title>
+    <title>Search History - SearchHub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/history.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-<header>
-    <div class="header-top">
-        <div class="nav-wrapper">
-            <nav class="navbar">
-                <a href="index.html" class="nav-item">
-                    <i class="fas fa-home"></i>
-                    <span>Home</span>
-                </a>
-                <a href="saved.html" class="nav-item">
-                    <i class="fas fa-bookmark"></i>
-                    <span>Saved Items</span>
-                </a>
-                <a href="history.html" class="nav-item active">
-                    <i class="fas fa-history"></i>
-                    <span>Search History</span>
-                </a>
-            </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <i class="fas fa-search-plus"></i>
+                <span>SearchHub</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link"><i class="fas fa-search"></i> Search</a>
+                <a href="saved.html" class="nav-link"><i class="fas fa-bookmark"></i> Saved</a>
+                <a href="history.html" class="nav-link active"><i class="fas fa-history"></i> History</a>
+            </div>
         </div>
-        <div class="header-info">
-            <h1><i class="fas fa-search"></i> Search History</h1>
-            <p class="subtitle">Track and revisit your searches</p>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1 class="page-title">
+                <i class="fas fa-history"></i>
+                <span>Search History</span>
+            </h1>
+            <p class="page-subtitle">Track and revisit your past searches</p>
+            <div class="page-stats">
+                <span class="stat-badge" id="historyCount">
+                    <i class="fas fa-list"></i>
+                    <span>0 searches</span>
+                </span>
+                <button id="clearHistory" class="btn btn-secondary btn-sm" disabled>
+                    <i class="fas fa-trash-alt"></i> Clear All
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="controls">
-        <span id="count-badge" class="badge">
-            <i class="fas fa-list"></i>
-            <span id="count-text">0</span>
-        </span>
-        <button id="clear-btn" class="btn btn-clear" disabled>
-            <i class="fas fa-trash-alt"></i>
-            <span>Clear All</span>
-        </button>
-    </div>
-</header>
-<main>
-    <div id="empty-state" class="empty-state">
-        <p>No recent searches</p>
-        <p class="subtitle">Your searches will appear here.</p>
+    </section>
+
+    <!-- History List -->
+    <section id="historySection" class="results-section">
+        <div class="results-container">
+            <div id="historyList" class="history-list"></div>
+        </div>
+    </section>
+
+    <!-- Empty State -->
+    <section id="emptyState" class="empty-state">
+        <div class="empty-content">
+            <div class="empty-icon">
+                <i class="fas fa-history"></i>
+            </div>
+            <h3>No Search History</h3>
+            <p>Your search history will appear here</p>
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-search"></i> Start Searching
+            </a>
+        </div>
+    </section>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="confirm-modal">
+        <div class="confirm-modal__backdrop"></div>
+        <div class="confirm-modal__content">
+            <div id="confirmIcon" class="confirm-modal__icon confirm-modal__icon--warning">
+                <i class="fas fa-history"></i>
+            </div>
+            <h3 id="confirmTitle" class="confirm-modal__title">Clear History?</h3>
+            <p id="confirmMessage" class="confirm-modal__message">
+                Are you sure you want to clear all your search history? This action cannot be undone.
+            </p>
+            <div class="confirm-modal__actions">
+                <button id="confirmCancel" class="confirm-modal__btn confirm-modal__btn--cancel">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button id="confirmAction" class="confirm-modal__btn confirm-modal__btn--confirm warning">
+                    <i class="fas fa-trash-alt"></i> Clear All
+                </button>
+            </div>
+        </div>
     </div>
 
-    <ul id="history-list" class="history-list"></ul>
-</main>
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
 
-<script src="js/history.js"></script>
+    <script src="js/history.js"></script>
 </body>
 </html>
