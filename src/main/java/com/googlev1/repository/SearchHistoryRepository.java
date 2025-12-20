@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface SearchHistoryRepository extends JpaRepository<SearchHistory, Long> {
+    
+    // Petit commentaire: ajouté pour contribution (Maram Benwarred)
 
     List<SearchHistory> findTop20ByOrderBySearchedAtDesc();
 
