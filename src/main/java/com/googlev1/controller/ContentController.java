@@ -20,7 +20,6 @@ public class ContentController {
     }
 
     @GetMapping
-    // API: fetches extracted content for a URL; "forceRefresh" bypasses cache when true.
     public ResponseEntity<?> getContent(
             @RequestParam(name = "url") String url,
             @RequestParam(name = "forceRefresh", defaultValue = "false") boolean forceRefresh
