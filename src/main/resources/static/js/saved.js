@@ -28,10 +28,12 @@ async function loadSavedItems() {
 function displayItems(items) {
     const container = document.getElementById('items-container');
     const emptyState = document.getElementById('empty-state');
-    const badge = document.getElementById('count-badge');
+    const countText = document.getElementById('count-text');
     
     // Update count
-    badge.textContent = `${items.length} item${items.length !== 1 ? 's' : ''}`;
+    if (countText) {
+        countText.textContent = items.length;
+    }
     
     if (items.length === 0) {
         emptyState.style.display = 'block';
