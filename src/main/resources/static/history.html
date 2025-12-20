@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/history.css">
+</head>
+<body>
+<header>
+    <div class="header-top">
+        <div class="nav-wrapper">
+            <nav class="navbar">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="saved.html" class="nav-item">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Saved Items</span>
+                </a>
+                <a href="history.html" class="nav-item active">
+                    <i class="fas fa-history"></i>
+                    <span>Search History</span>
+                </a>
+            </nav>
+        </div>
+        <div class="header-info">
+            <h1><i class="fas fa-search"></i> Search History</h1>
+            <p class="subtitle">Track and revisit your searches</p>
+        </div>
+    </div>
+    <div class="controls">
+        <span id="count-badge" class="badge">
+            <i class="fas fa-list"></i>
+            <span id="count-text">0</span>
+        </span>
+        <button id="clear-btn" class="btn btn-clear" disabled>
+            <i class="fas fa-trash-alt"></i>
+            <span>Clear All</span>
+        </button>
+    </div>
+</header>
+<main>
+    <div id="empty-state" class="empty-state">
+        <p>No recent searches</p>
+        <p class="subtitle">Your searches will appear here.</p>
+    </div>
+
+    <ul id="history-list" class="history-list"></ul>
+</main>
+
+<script src="js/history.js"></script>
+</body>
+</html>

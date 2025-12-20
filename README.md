@@ -188,6 +188,15 @@ mvn test
    - Check "Search History" to see past searches
    - Click on any previous search to run it again
 
+## Results Display Integration
+
+Frontend hooks for search results:
+- `#resultsContainer` renders result cards.
+- `#resultsEmpty` shows the empty state message.
+- `#resultsPagination` renders pagination buttons.
+- Call `window.displayResults(resultsArray)` after `/api/search` returns data.
+- Use `window.contentViewer.open(url, { title, summary })` to open the content modal.
+
 ## 🔧 Configuration
 
 ### Application Properties
